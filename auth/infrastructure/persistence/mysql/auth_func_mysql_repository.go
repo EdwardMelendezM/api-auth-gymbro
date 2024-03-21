@@ -3,6 +3,8 @@ package mysql
 import (
 	"context"
 	_ "embed"
+
+	"github.com/EdwardMelendezM/api-shared"
 )
 
 //go:embed sql/check_existence_by_username.sql
