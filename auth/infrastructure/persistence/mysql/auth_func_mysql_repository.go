@@ -1,6 +1,7 @@
 package mysql
 
 import (
+	"auth-api/db"
 	"context"
 	_ "embed"
 
@@ -16,4 +17,15 @@ func (r userMysqlRepo) CheckExistenceByUsername(
 ) bool {
 	var err error
 	defer errorLog.PanicRecovery(ctx, &err)
+
+	var totalTmp int
+	err = db.Client.QueryRowContext(
+		ctx,
+		QueryCheckExistenceByUsername,
+		username,
+	).Scan(totalTmp)
+	if err != nil {
+		return false
+	}
+	return totalTmp > 0
 }
