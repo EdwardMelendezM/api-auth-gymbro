@@ -1,1 +1,3 @@
-SELECT COUNT(*) FROM users WHERE username = ?;
+SELECT COUNT(*)
+FROM users
+WHERE username = ?;
