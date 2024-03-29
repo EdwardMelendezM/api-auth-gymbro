@@ -19,7 +19,7 @@ var QueryVerifyPassword string
 func (r userMysqlRepo) CheckExistenceByUsername(
 	ctx context.Context,
 	username string,
-) bool {
+) int {
 	var err error
 	defer errorLog.PanicRecovery(ctx, &err)
 
@@ -30,15 +30,15 @@ func (r userMysqlRepo) CheckExistenceByUsername(
 		username,
 	).Scan(totalTmp)
 	if err != nil {
-		return false
+		return 0
 	}
-	return totalTmp > 0
+	return totalTmp
 }
 
 func (r userMysqlRepo) VerifyPassword(
 	ctx context.Context,
 	body domain.LoginBody,
-) bool {
+) int {
 	var err error
 	defer errorLog.PanicRecovery(ctx, &err)
 
@@ -50,9 +50,9 @@ func (r userMysqlRepo) VerifyPassword(
 		body.Password,
 	).Scan(totalTmp)
 	if err != nil {
-		return false
+		return 0
 	}
-	return totalTmp > 0
+	return totalTmp
 }
 
 func (r userMysqlRepo) CheckAccountStatus(
