@@ -1,12 +1,13 @@
 package mysql
 
 import (
-	"auth-api/auth/domain"
-	"auth-api/db"
 	"context"
 	_ "embed"
 
 	"github.com/EdwardMelendezM/info-code-api-shared-v1/error-log"
+
+	"github.com/EdwardMelendezM/api-auth/auth/domain"
+	"github.com/EdwardMelendezM/api-auth/db"
 )
 
 //go:embed sql/check_existence_by_username.sql

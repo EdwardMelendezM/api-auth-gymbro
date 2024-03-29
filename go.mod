@@ -1,4 +1,4 @@
-module auth-api
+module github.com/EdwardMelendezM/api-auth
 
 go 1.20
 

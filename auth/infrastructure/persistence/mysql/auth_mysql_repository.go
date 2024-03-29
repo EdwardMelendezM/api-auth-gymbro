@@ -3,7 +3,8 @@ package mysql
 import (
 	"time"
 
-	"auth-api/auth/domain"
+	"github.com/EdwardMelendezM/api-auth/auth/domain"
+
 	"github.com/EdwardMelendezM/info-code-api-shared-v1/clock"
 )
 
