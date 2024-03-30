@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"time"
 
-	"auth-api/config"
+	"github.com/EdwardMelendezM/api-auth/config"
 )
 
 func InitClients(cfg config.Configuration) (err error) {

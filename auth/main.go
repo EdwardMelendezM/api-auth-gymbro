@@ -43,17 +43,3 @@ func main() {
 		return
 	}
 }
-
-//func loadSwagger(router *gin.Engine) {
-//	docs.SwaggerInfo.Title = "Swagger Users API"
-//	docs.SwaggerInfo.Description = "This is a users microservice."
-//	docs.SwaggerInfo.Version = "1.0"
-//	docs.SwaggerInfo.Host = "localhost:9010"
-//	docs.SwaggerInfo.BasePath = "/"
-//	docs.SwaggerInfo.Schemes = []string{"http", "https"}
-//
-//	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
-//
-//	router.StaticFile("/docs/swagger3.json", "./docs/swagger3.json")
-//}
-//
