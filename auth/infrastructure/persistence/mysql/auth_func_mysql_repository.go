@@ -20,7 +20,7 @@ func (r userMysqlRepo) CheckExistenceByUsername(
 	ctx context.Context,
 	username string,
 ) (countAccount int, err error) {
-	defer errorLog.PanicRecovery(ctx, &err)
+	defer errorLog.PanicRecovery(&ctx, &err)
 
 	err = db.Client.QueryRowContext(
 		ctx,
@@ -37,7 +37,7 @@ func (r userMysqlRepo) VerifyPassword(
 	ctx context.Context,
 	body domain.LoginBody,
 ) (countAccount int, err error) {
-	defer errorLog.PanicRecovery(ctx, &err)
+	defer errorLog.PanicRecovery(&ctx, &err)
 
 	err = db.Client.QueryRowContext(
 		ctx,
@@ -55,7 +55,7 @@ func (r userMysqlRepo) CheckAccountStatus(
 	ctx context.Context,
 	body domain.LoginBody,
 ) (statusAccount int, err error) {
-	defer errorLog.PanicRecovery(ctx, &err)
+	defer errorLog.PanicRecovery(&ctx, &err)
 
 	var statusTmp int
 	err = db.Client.QueryRowContext(

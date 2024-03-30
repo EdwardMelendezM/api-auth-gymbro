@@ -12,7 +12,7 @@ func (u authUseCase) Login(
 	ctx context.Context,
 	body domain.LoginBody,
 ) (token string, err error) {
-	defer errorLog.PanicRecovery(ctx, &err)
+	defer errorLog.PanicRecovery(&ctx, &err)
 
 	var checkExistenceByUsername, errCheckExistenceByUsername = u.authRepository.CheckExistenceByUsername(ctx, body.Username)
 	if errCheckExistenceByUsername != nil {

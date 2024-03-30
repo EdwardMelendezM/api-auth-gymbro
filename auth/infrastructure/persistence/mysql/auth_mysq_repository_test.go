@@ -28,7 +28,7 @@ func TestRepositoryAuth_CheckExistenceByUsername(t *testing.T) {
 		clock := &mockClock.Clock{}
 		r := NewAuthRepository(clock, 60)
 		var totalExpected int
-		totalExpected = r.CheckExistenceByUsername(context.Background(), username)
+		totalExpected, err = r.CheckExistenceByUsername(context.Background(), username)
 		assert.Equal(t, existingUser, totalExpected)
 	})
 }
