@@ -4,7 +4,7 @@ import (
 	errorLog "github.com/EdwardMelendezM/info-code-api-shared-v1/error-log"
 	"time"
 
-	"github.com/EdwardMelendezM/api-auth/auth/domain"
+	"github.com/EdwardMelendezM/api-auth/authentication/domain"
 )
 
 type authUseCase struct {

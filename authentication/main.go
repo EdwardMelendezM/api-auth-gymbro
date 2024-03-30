@@ -7,7 +7,7 @@ import (
 	"github.com/gin-gonic/gin"
 	_ "github.com/go-sql-driver/mysql"
 
-	"github.com/EdwardMelendezM/api-auth/auth/setup"
+	"github.com/EdwardMelendezM/api-auth/authentication/setup"
 	"github.com/EdwardMelendezM/api-auth/config"
 	"github.com/EdwardMelendezM/api-auth/db"
 )

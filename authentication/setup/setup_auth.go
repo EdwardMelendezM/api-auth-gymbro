@@ -7,9 +7,9 @@ import (
 
 	"github.com/EdwardMelendezM/info-code-api-shared-v1/clock"
 
-	authDomain "github.com/EdwardMelendezM/api-auth/auth/infrastructure/persistence/mysql"
-	authHttpDelivery "github.com/EdwardMelendezM/api-auth/auth/interfaces"
-	authUseCase "github.com/EdwardMelendezM/api-auth/auth/usecase"
+	authDomain "github.com/EdwardMelendezM/api-auth/authentication/infrastructure/persistence/mysql"
+	authHttpDelivery "github.com/EdwardMelendezM/api-auth/authentication/interfaces"
+	authUseCase "github.com/EdwardMelendezM/api-auth/authentication/usecase"
 )
 
 func LoadAuth(router *gin.Engine) {

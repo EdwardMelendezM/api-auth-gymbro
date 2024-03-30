@@ -7,7 +7,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/go-playground/validator/v10"
 
-	authDomain "github.com/EdwardMelendezM/api-auth/auth/domain"
+	authDomain "github.com/EdwardMelendezM/api-auth/authentication/domain"
 
 	restShared "github.com/EdwardMelendezM/info-code-api-shared-v1/rest"
 )

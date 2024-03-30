@@ -5,7 +5,7 @@ import (
 
 	errorLog "github.com/EdwardMelendezM/info-code-api-shared-v1/error-log"
 
-	authDomain "github.com/EdwardMelendezM/api-auth/auth/domain"
+	authDomain "github.com/EdwardMelendezM/api-auth/authentication/domain"
 )
 
 type authHandler struct {
@@ -24,6 +24,6 @@ func NewAuthHandler(
 		err:         errorLog.NewErr().SetLayer(errorLog.Interface),
 	}
 
-	apiAuth := router.Group("/api/v1/auth")
+	apiAuth := router.Group("/api/v1/authentication")
 	apiAuth.POST("/login", handler.Login)
 }

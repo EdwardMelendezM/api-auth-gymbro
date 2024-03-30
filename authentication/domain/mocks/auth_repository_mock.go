@@ -5,7 +5,7 @@ package auth
 import (
 	context "context"
 
-	domain "github.com/EdwardMelendezM/api-auth/auth/domain"
+	domain "github.com/EdwardMelendezM/api-auth/authentication/domain"
 	mock "github.com/stretchr/testify/mock"
 )
 

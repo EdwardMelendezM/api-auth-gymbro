@@ -6,7 +6,7 @@ import (
 	"github.com/EdwardMelendezM/info-code-api-shared-v1/clock"
 	errorLog "github.com/EdwardMelendezM/info-code-api-shared-v1/error-log"
 
-	"github.com/EdwardMelendezM/api-auth/auth/domain"
+	"github.com/EdwardMelendezM/api-auth/authentication/domain"
 )
 
 type userMysqlRepo struct {
