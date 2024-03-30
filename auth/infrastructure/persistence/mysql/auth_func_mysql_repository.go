@@ -30,7 +30,7 @@ func (r userMysqlRepo) CheckExistenceByUsername(
 		ctx,
 		QueryCheckExistenceByUsername,
 		username,
-	).Scan(countAccountTmp)
+	).Scan(&countAccountTmp)
 	if err != nil {
 		return nil, r.err.Clone().SetFunction("CheckExistenceByUsername").SetRaw(err)
 	}
@@ -50,7 +50,7 @@ func (r userMysqlRepo) VerifyPassword(
 		QueryVerifyPassword,
 		body.Username,
 		body.Password,
-	).Scan(countAccountTmp)
+	).Scan(&countAccountTmp)
 	if err != nil {
 		return nil, r.err.Clone().SetFunction("VerifyPassword").SetRaw(err)
 	}
@@ -70,7 +70,7 @@ func (r userMysqlRepo) CheckAccountStatus(
 		QueryCheckAccountStatus,
 		body.Username,
 		body.Password,
-	).Scan(statusTmp)
+	).Scan(&statusTmp)
 	if err != nil {
 		return nil, r.err.Clone().SetFunction("CheckAccountStatus").SetRaw(err)
 	}
