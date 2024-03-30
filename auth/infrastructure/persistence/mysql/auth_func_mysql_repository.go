@@ -16,56 +16,64 @@ var QueryCheckExistenceByUsername string
 //go:embed sql/verify_password.sql
 var QueryVerifyPassword string
 
+//go:embed sql/check_account_status.sql
+var QueryCheckAccountStatus string
+
 func (r userMysqlRepo) CheckExistenceByUsername(
 	ctx context.Context,
 	username string,
-) (countAccount int, err error) {
+) (countAccount *int, err error) {
 	defer errorLog.PanicRecovery(&ctx, &err)
 
+	var countAccountTmp int
 	err = db.Client.QueryRowContext(
 		ctx,
 		QueryCheckExistenceByUsername,
 		username,
-	).Scan(countAccount)
+	).Scan(countAccountTmp)
 	if err != nil {
-		return 0, r.err.Clone().SetFunction("CheckExistenceByUsername").SetRaw(err)
+		return nil, r.err.Clone().SetFunction("CheckExistenceByUsername").SetRaw(err)
 	}
+	countAccount = &countAccountTmp
 	return countAccount, err
 }
 
 func (r userMysqlRepo) VerifyPassword(
 	ctx context.Context,
 	body domain.LoginBody,
-) (countAccount int, err error) {
+) (countAccount *int, err error) {
 	defer errorLog.PanicRecovery(&ctx, &err)
 
+	var countAccountTmp int
 	err = db.Client.QueryRowContext(
 		ctx,
 		QueryVerifyPassword,
 		body.Username,
 		body.Password,
-	).Scan(countAccount)
+	).Scan(countAccountTmp)
 	if err != nil {
-		return 0, r.err.Clone().SetFunction("VerifyPassword").SetRaw(err)
+		return nil, r.err.Clone().SetFunction("VerifyPassword").SetRaw(err)
 	}
+	countAccount = &countAccountTmp
 	return countAccount, err
 }
 
 func (r userMysqlRepo) CheckAccountStatus(
 	ctx context.Context,
 	body domain.LoginBody,
-) (statusAccount int, err error) {
+) (statusAccount *int, err error) {
 	defer errorLog.PanicRecovery(&ctx, &err)
 
 	var statusTmp int
 	err = db.Client.QueryRowContext(
 		ctx,
-		QueryVerifyPassword,
+		QueryCheckAccountStatus,
 		body.Username,
 		body.Password,
 	).Scan(statusTmp)
 	if err != nil {
-		return -1, r.err.Clone().SetFunction("CheckAccountStatus").SetRaw(err)
+		return nil, r.err.Clone().SetFunction("CheckAccountStatus").SetRaw(err)
 	}
-	return statusTmp, err
+	statusAccount = &statusTmp
+	return statusAccount, err
 }

@@ -18,7 +18,8 @@ func (u authUseCase) Login(
 	if errCheckUserStatus != nil {
 		return "", errCheckUserStatus
 	}
-	if checkUserStatus == 0 {
+
+	if *checkUserStatus == 0 {
 		return "", u.err.Clone().CopyCodeDescription(domain.ErrUserStatusNotActive).SetRaw(errCheckUserStatus)
 	}
 
@@ -26,7 +27,7 @@ func (u authUseCase) Login(
 	if errCheckExistenceByUsername != nil {
 		return "", errCheckExistenceByUsername
 	}
-	if checkExistenceByUsername != 1 {
+	if *checkExistenceByUsername != 1 {
 		return "", u.err.Clone().CopyCodeDescription(domain.ErrNotFoundUsername).SetRaw(errCheckExistenceByUsername)
 	}
 
@@ -34,7 +35,7 @@ func (u authUseCase) Login(
 	if errCheckExistenceByPassword != nil {
 		return "", errCheckExistenceByPassword
 	}
-	if checkExistenceByPassword != 1 {
+	if *checkExistenceByPassword != 1 {
 		return "", u.err.Clone().CopyCodeDescription(domain.ErrNotFoundPassword).SetRaw(errCheckExistenceByPassword)
 	}
 
