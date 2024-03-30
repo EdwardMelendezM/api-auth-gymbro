@@ -56,7 +56,7 @@ func (_m *AuthRepository) VerifyPassword(ctx context.Context, body domain.LoginB
 	return r0
 }
 
-// NewAuthRepository creates a new instance of AuthRepository. It also registers a testing interface on the mock and a cleanup function to assert the mocks expectations.
+// NewAuthRepository creates a new instance of AuthRepository. It also registers a testing interfaces on the mock and a cleanup function to assert the mocks expectations.
 // The first argument is typically a *testing.T value.
 func NewAuthRepository(t interface {
 	mock.TestingT

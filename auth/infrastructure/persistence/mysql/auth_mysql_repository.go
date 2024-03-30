@@ -3,14 +3,16 @@ package mysql
 import (
 	"time"
 
-	"github.com/EdwardMelendezM/api-auth/auth/domain"
-
 	"github.com/EdwardMelendezM/info-code-api-shared-v1/clock"
+	errorLog "github.com/EdwardMelendezM/info-code-api-shared-v1/error-log"
+
+	"github.com/EdwardMelendezM/api-auth/auth/domain"
 )
 
 type userMysqlRepo struct {
 	clock   clock.Clock
 	timeout time.Duration
+	err     *errorLog.CustomError
 }
 
 func NewAuthRepository(
@@ -20,6 +22,7 @@ func NewAuthRepository(
 	rep := &userMysqlRepo{
 		clock:   clock,
 		timeout: time.Duration(mongoTimeout) * time.Second,
+		err:     errorLog.NewErr().SetLayer(errorLog.Infra),
 	}
 	return rep
 }
