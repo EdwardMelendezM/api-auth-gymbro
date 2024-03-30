@@ -28,7 +28,7 @@ func (_m *AuthUseCase) Login(body domain.LoginBody) *string {
 	return r0
 }
 
-// NewAuthUseCase creates a new instance of AuthUseCase. It also registers a testing interface on the mock and a cleanup function to assert the mocks expectations.
+// NewAuthUseCase creates a new instance of AuthUseCase. It also registers a testing interfaces on the mock and a cleanup function to assert the mocks expectations.
 // The first argument is typically a *testing.T value.
 func NewAuthUseCase(t interface {
 	mock.TestingT

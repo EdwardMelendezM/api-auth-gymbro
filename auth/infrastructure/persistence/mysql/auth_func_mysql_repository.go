@@ -19,48 +19,43 @@ var QueryVerifyPassword string
 func (r userMysqlRepo) CheckExistenceByUsername(
 	ctx context.Context,
 	username string,
-) int {
-	var err error
-	defer errorLog.PanicRecovery(ctx, &err)
+) (countAccount int, err error) {
+	defer errorLog.PanicRecovery(&ctx, &err)
 
-	var totalTmp int
 	err = db.Client.QueryRowContext(
 		ctx,
 		QueryCheckExistenceByUsername,
 		username,
-	).Scan(totalTmp)
+	).Scan(countAccount)
 	if err != nil {
-		return 0
+		return 0, r.err.Clone().SetFunction("CheckExistenceByUsername").SetRaw(err)
 	}
-	return totalTmp
+	return countAccount, err
 }
 
 func (r userMysqlRepo) VerifyPassword(
 	ctx context.Context,
 	body domain.LoginBody,
-) int {
-	var err error
-	defer errorLog.PanicRecovery(ctx, &err)
+) (countAccount int, err error) {
+	defer errorLog.PanicRecovery(&ctx, &err)
 
-	var totalTmp int
 	err = db.Client.QueryRowContext(
 		ctx,
 		QueryVerifyPassword,
 		body.Username,
 		body.Password,
-	).Scan(totalTmp)
+	).Scan(countAccount)
 	if err != nil {
-		return 0
+		return 0, r.err.Clone().SetFunction("VerifyPassword").SetRaw(err)
 	}
-	return totalTmp
+	return countAccount, err
 }
 
 func (r userMysqlRepo) CheckAccountStatus(
 	ctx context.Context,
 	body domain.LoginBody,
-) bool {
-	var err error
-	defer errorLog.PanicRecovery(ctx, &err)
+) (statusAccount int, err error) {
+	defer errorLog.PanicRecovery(&ctx, &err)
 
 	var statusTmp int
 	err = db.Client.QueryRowContext(
@@ -70,7 +65,7 @@ func (r userMysqlRepo) CheckAccountStatus(
 		body.Password,
 	).Scan(statusTmp)
 	if err != nil {
-		return false
+		return -1, r.err.Clone().SetFunction("CheckAccountStatus").SetRaw(err)
 	}
-	return statusTmp > 0
+	return statusTmp, err
 }
