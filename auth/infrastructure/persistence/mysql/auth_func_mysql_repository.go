@@ -19,47 +19,42 @@ var QueryVerifyPassword string
 func (r userMysqlRepo) CheckExistenceByUsername(
 	ctx context.Context,
 	username string,
-) int {
-	var err error
+) (countAccount int, err error) {
 	defer errorLog.PanicRecovery(ctx, &err)
 
-	var totalTmp int
 	err = db.Client.QueryRowContext(
 		ctx,
 		QueryCheckExistenceByUsername,
 		username,
-	).Scan(totalTmp)
+	).Scan(countAccount)
 	if err != nil {
-		return 0
+		return 0, err
 	}
-	return totalTmp
+	return countAccount, err
 }
 
 func (r userMysqlRepo) VerifyPassword(
 	ctx context.Context,
 	body domain.LoginBody,
-) int {
-	var err error
+) (countAccount int, err error) {
 	defer errorLog.PanicRecovery(ctx, &err)
 
-	var totalTmp int
 	err = db.Client.QueryRowContext(
 		ctx,
 		QueryVerifyPassword,
 		body.Username,
 		body.Password,
-	).Scan(totalTmp)
+	).Scan(countAccount)
 	if err != nil {
-		return 0
+		return 0, err
 	}
-	return totalTmp
+	return countAccount, err
 }
 
 func (r userMysqlRepo) CheckAccountStatus(
 	ctx context.Context,
 	body domain.LoginBody,
-) bool {
-	var err error
+) (statusAccount int, err error) {
 	defer errorLog.PanicRecovery(ctx, &err)
 
 	var statusTmp int
@@ -70,7 +65,7 @@ func (r userMysqlRepo) CheckAccountStatus(
 		body.Password,
 	).Scan(statusTmp)
 	if err != nil {
-		return false
+		return -1, err
 	}
-	return statusTmp > 0
+	return statusTmp, err
 }
