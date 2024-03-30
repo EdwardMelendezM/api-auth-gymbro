@@ -7,6 +7,7 @@ import (
 	"github.com/gin-gonic/gin"
 	_ "github.com/go-sql-driver/mysql"
 
+	"github.com/EdwardMelendezM/api-auth/auth/setup"
 	"github.com/EdwardMelendezM/api-auth/config"
 	"github.com/EdwardMelendezM/api-auth/db"
 )
@@ -35,7 +36,7 @@ func main() {
 	router := gin.Default()
 
 	//loadSwagger(router)
-	//setup.LoadUsers(router)
+	setup.LoadAuth(router)
 
 	serverPort := fmt.Sprintf(":%s", os.Getenv("SERVER_PORT"))
 	err = router.Run(serverPort)
