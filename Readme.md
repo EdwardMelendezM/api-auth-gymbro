@@ -8,6 +8,6 @@ This is a microservice for the authentication service.
   make generate_db_mysql
   ```
 - Or run docker compose
-```script
+  ```script
   docker-compose up -d
-```
+  ```
