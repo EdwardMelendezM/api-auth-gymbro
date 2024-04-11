@@ -8,5 +8,9 @@ services:
       - "3307:3306"
     environment:
       MYSQL_ROOT_PASSWORD: "root"
-      MYSQL_DATABASE: "erp"
-    container_name: db_erp
+      MYSQL_DATABASE: "gymbro_db"
+      MYSQL_USER: "erp_user"
+      MYSQL_PASSWORD: "erp_password"
+    volumes:
+      - ./seed/gymbro:/docker-entrypoint-initdb.d
+    container_name: gymbro_db
