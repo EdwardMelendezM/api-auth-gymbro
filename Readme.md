@@ -1,5 +1,13 @@
 # Microservice for AUTH service
 
-This is a microservice for the authentication service. It is responsible for authenticating the user and generating the
-JWT token for the user. It is also responsible for verifying the JWT token and extracting the user information from the
-token.
+This is a microservice for the authentication service.
+
+## Install
+- Run makefile 
+  ```script
+  make generate_db_mysql
+  ```
+- Or run docker compose
+```script
+  docker-compose up -d
+```
