@@ -1,7 +1,7 @@
 package usecase
 
 import (
-	errorLog "github.com/EdwardMelendezM/info-code-api-shared-v1/error-log"
+	errorLog "github.com/EdwardMelendezM/api-info-shared/error-log"
 	"time"
 
 	"github.com/EdwardMelendezM/api-auth/authentication/domain"

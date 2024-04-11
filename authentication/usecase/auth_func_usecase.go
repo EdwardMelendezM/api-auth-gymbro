@@ -5,7 +5,7 @@ import (
 
 	"github.com/EdwardMelendezM/api-auth/authentication/domain"
 
-	"github.com/EdwardMelendezM/info-code-api-shared-v1/error-log"
+	"github.com/EdwardMelendezM/api-info-shared/error-log"
 )
 
 func (u authUseCase) Login(

@@ -4,10 +4,10 @@ import (
 	"context"
 	_ "embed"
 
-	"github.com/EdwardMelendezM/info-code-api-shared-v1/error-log"
-
 	"github.com/EdwardMelendezM/api-auth/authentication/domain"
 	"github.com/EdwardMelendezM/api-auth/db"
+
+	errorLog "github.com/EdwardMelendezM/api-info-shared/error-log"
 )
 
 //go:embed sql/check_existence_by_username.sql

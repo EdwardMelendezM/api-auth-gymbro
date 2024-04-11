@@ -5,7 +5,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 
-	"github.com/EdwardMelendezM/info-code-api-shared-v1/clock"
+	"github.com/EdwardMelendezM/api-info-shared/clock"
 
 	authDomain "github.com/EdwardMelendezM/api-auth/authentication/infrastructure/persistence/mysql"
 	authHttpDelivery "github.com/EdwardMelendezM/api-auth/authentication/interfaces"

@@ -3,7 +3,7 @@ package domain
 import (
 	"net/http"
 
-	errLog "github.com/EdwardMelendezM/info-code-api-shared-v1/error-log"
+	errLog "github.com/EdwardMelendezM/api-info-shared/error-log"
 )
 
 const (

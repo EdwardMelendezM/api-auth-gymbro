@@ -7,7 +7,7 @@ import (
 	"github.com/DATA-DOG/go-sqlmock"
 	"github.com/stretchr/testify/assert"
 
-	mockClock "github.com/EdwardMelendezM/info-code-api-shared-v1/clock/mocks"
+	mockClock "github.com/EdwardMelendezM/api-info-shared/clock/mocks"
 )
 
 func TestRepositoryAuth_CheckExistenceByUsername(t *testing.T) {
@@ -27,7 +27,7 @@ func TestRepositoryAuth_CheckExistenceByUsername(t *testing.T) {
 
 		clock := &mockClock.Clock{}
 		r := NewAuthRepository(clock, 60)
-		var totalExpected int
+		var totalExpected *int
 		totalExpected, err = r.CheckExistenceByUsername(context.Background(), username)
 		assert.Equal(t, existingUser, totalExpected)
 	})

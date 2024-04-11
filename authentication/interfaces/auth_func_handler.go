@@ -9,7 +9,7 @@ import (
 
 	authDomain "github.com/EdwardMelendezM/api-auth/authentication/domain"
 
-	restShared "github.com/EdwardMelendezM/info-code-api-shared-v1/rest"
+	restShared "github.com/EdwardMelendezM/api-info-shared/rest"
 )
 
 func (h authHandler) Login(c *gin.Context) {

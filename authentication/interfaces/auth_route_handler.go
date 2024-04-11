@@ -3,7 +3,7 @@ package rest
 import (
 	"github.com/gin-gonic/gin"
 
-	errorLog "github.com/EdwardMelendezM/info-code-api-shared-v1/error-log"
+	errorLog "github.com/EdwardMelendezM/api-info-shared/error-log"
 
 	authDomain "github.com/EdwardMelendezM/api-auth/authentication/domain"
 )
