@@ -13,7 +13,7 @@ import (
 	authUseCase "github.com/EdwardMelendezM/api-auth/authentication/usecase"
 )
 
-func LoadAuth(router *gin.Engine) {
+func LoadAuthentication(router *gin.Engine) {
 	timeoutContext := time.Duration(60) * time.Second
 	newClock := clock.NewClock()
 

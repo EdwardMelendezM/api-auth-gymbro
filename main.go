@@ -5,16 +5,12 @@ import (
 	"os"
 
 	"github.com/gin-gonic/gin"
-	_ "github.com/go-sql-driver/mysql"
 
 	"github.com/EdwardMelendezM/api-auth/authentication/setup"
 	"github.com/EdwardMelendezM/api-info-shared/config"
 	"github.com/EdwardMelendezM/api-info-shared/db"
 )
 
-// @securityDefinitions.apikey BearerAuth
-// @in header
-// @name Authorization
 func main() {
 	cfg := config.Configuration{
 		ServerPort:  os.Getenv("SERVER_PORT"),
@@ -27,7 +23,6 @@ func main() {
 			DbPassword: os.Getenv("DB_PASSWORD"),
 		},
 	}
-
 	err := db.InitClients(cfg)
 	if err != nil {
 		return
@@ -35,7 +30,6 @@ func main() {
 	defer db.Client.Close()
 	router := gin.Default()
 
-	//loadSwagger(router)
 	setup.LoadAuthentication(router)
 
 	serverPort := fmt.Sprintf(":%s", os.Getenv("SERVER_PORT"))
