@@ -5,10 +5,11 @@ import (
 
 	"github.com/gin-gonic/gin"
 
+	authJwtRepo "github.com/EdwardMelendezM/api-info-shared/auth/infrastructure/jwt"
 	"github.com/EdwardMelendezM/api-info-shared/clock"
 
 	authDomain "github.com/EdwardMelendezM/api-auth/authentication/infrastructure/persistence/mysql"
-	authHttpDelivery "github.com/EdwardMelendezM/api-auth/authentication/interfaces"
+	authHttpDelivery "github.com/EdwardMelendezM/api-auth/authentication/interfaces/rest"
 	authUseCase "github.com/EdwardMelendezM/api-auth/authentication/usecase"
 )
 
@@ -17,6 +18,7 @@ func LoadAuth(router *gin.Engine) {
 	newClock := clock.NewClock()
 
 	authRepository := authDomain.NewAuthRepository(newClock, 60)
-	authUCase := authUseCase.NewAuthUseCase(authRepository, timeoutContext)
+	authJwtRepository := authJwtRepo.NewAuthRepository()
+	authUCase := authUseCase.NewAuthUseCase(authRepository, timeoutContext, authJwtRepository)
 	authHttpDelivery.NewAuthHandler(authUCase, router)
 }

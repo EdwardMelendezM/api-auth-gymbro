@@ -4,10 +4,10 @@ import (
 	"context"
 	_ "embed"
 
-	"github.com/EdwardMelendezM/api-auth/authentication/domain"
-	"github.com/EdwardMelendezM/api-auth/db"
-
+	"github.com/EdwardMelendezM/api-info-shared/db"
 	errorLog "github.com/EdwardMelendezM/api-info-shared/error-log"
+
+	"github.com/EdwardMelendezM/api-auth/authentication/domain"
 )
 
 //go:embed sql/check_existence_by_username.sql
@@ -41,10 +41,10 @@ func (r userMysqlRepo) CheckExistenceByUsername(
 func (r userMysqlRepo) VerifyPassword(
 	ctx context.Context,
 	body domain.LoginBody,
-) (countAccount *int, err error) {
+) (userId *string, err error) {
 	defer errorLog.PanicRecovery(&ctx, &err)
 
-	var countAccountTmp int
+	var countAccountTmp string
 	err = db.Client.QueryRowContext(
 		ctx,
 		QueryVerifyPassword,
@@ -54,8 +54,8 @@ func (r userMysqlRepo) VerifyPassword(
 	if err != nil {
 		return nil, r.err.Clone().SetFunction("VerifyPassword").SetRaw(err)
 	}
-	countAccount = &countAccountTmp
-	return countAccount, err
+	userId = &countAccountTmp
+	return userId, err
 }
 
 func (r userMysqlRepo) CheckAccountStatus(

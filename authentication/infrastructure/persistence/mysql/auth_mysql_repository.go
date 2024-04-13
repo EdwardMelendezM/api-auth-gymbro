@@ -10,7 +10,8 @@ import (
 )
 
 type userMysqlRepo struct {
-	clock   clock.Clock
+	clock clock.Clock
+
 	timeout time.Duration
 	err     *errorLog.CustomError
 }

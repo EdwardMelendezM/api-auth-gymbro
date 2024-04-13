@@ -13,6 +13,8 @@ func (u authUseCase) Login(
 	body domain.LoginBody,
 ) (token string, err error) {
 	defer errorLog.PanicRecovery(&ctx, &err)
+	var userIdAux string
+	var tokenAux string
 
 	var checkExistenceByUsername, errCheckExistenceByUsername = u.authRepository.CheckExistenceByUsername(ctx, body.Username)
 	if errCheckExistenceByUsername != nil {
@@ -22,22 +24,18 @@ func (u authUseCase) Login(
 		return "", u.err.Clone().CopyCodeDescription(domain.ErrNotFoundUsername).SetRaw(errCheckExistenceByUsername)
 	}
 
-	var checkExistenceByPassword, errCheckExistenceByPassword = u.authRepository.VerifyPassword(ctx, body)
+	var userId, errCheckExistenceByPassword = u.authRepository.VerifyPassword(ctx, body)
 	if errCheckExistenceByPassword != nil {
 		return "", errCheckExistenceByPassword
 	}
-	if *checkExistenceByPassword != 1 {
-		return "", u.err.Clone().CopyCodeDescription(domain.ErrNotFoundPassword).SetRaw(errCheckExistenceByPassword)
-	}
 
-	var checkUserStatus, errCheckUserStatus = u.authRepository.CheckAccountStatus(ctx, body)
-	if errCheckUserStatus != nil {
-		return "", errCheckUserStatus
-	}
+	userIdAux = *userId
 
-	if *checkUserStatus == 0 {
-		return "", u.err.Clone().CopyCodeDescription(domain.ErrUserStatusNotActive).SetRaw(errCheckUserStatus)
+	var tokenOfLogin, errTokenOfLogin = u.authJwtRepo.GenerateToken(userIdAux)
+	if errTokenOfLogin != nil {
+		return "", errTokenOfLogin
 	}
+	tokenAux = *tokenOfLogin
 
-	return "TOKEN OF LOGIN", nil
+	return tokenAux, nil
 }

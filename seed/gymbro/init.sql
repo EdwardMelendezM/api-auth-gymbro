@@ -10,9 +10,9 @@ create table core_users
         primary key,
     username   varchar(255) not null,
     password   varchar(255) not null,
-    enable     tinyint(1) not null,
+    enable     tinyint(1)   not null,
     created_at timestamp    not null,
-    deleted_at timestamp null
+    deleted_at timestamp    null
 );
 
 create table core_modules
@@ -20,9 +20,9 @@ create table core_modules
     id          varchar(36)  not null,
     name        varchar(255) not null,
     description varchar(255) not null,
-    enable      tinyint(1) not null,
+    enable      tinyint(1)   not null,
     created_at  timestamp    not null,
-    deleted_at  timestamp null,
+    deleted_at  timestamp    null,
     constraint core_modules_pk
         unique (id)
 );
@@ -33,9 +33,9 @@ create table core_roles
         primary key,
     name        varchar(255) not null,
     description varchar(255) not null,
-    enable      tinyint(1) not null,
-    created_at  timestamp null,
-    deleted_at  timestamp null
+    enable      tinyint(1)   not null,
+    created_at  timestamp    null,
+    deleted_at  timestamp    null
 ) comment 'roles of user';
 
 
@@ -58,9 +58,9 @@ create table core_views
     module_id   varchar(36)  not null,
     name        varchar(255) not null,
     description varchar(255) not null,
-    enable      tinyint(1) not null,
+    enable      tinyint(1)   not null,
     created_at  timestamp    not null,
-    deleted_at  timestamp null,
+    deleted_at  timestamp    null,
     constraint core_views_core_modules_id_fk
         foreign key (module_id) references core_modules (id)
 );
@@ -76,4 +76,7 @@ create table core_roles_views
     constraint roles_views_views_id_fk
         foreign key (view_id) references core_views (id)
 );
+
+INSERT INTO core_users (id, username, password, enable, created_at)
+VALUES ('94d3dca2-f9da-11ee-811d-0242ac130002', 'afit@gym.com', '00000000', 1, NOW());
 
