@@ -24,6 +24,6 @@ func NewAuthHandler(
 		err:         errorLog.NewErr().SetLayer(errorLog.Interface),
 	}
 
-	apiAuth := router.Group("/api/v1/authentication")
+	apiAuth := router.Group("/api/v1/auth")
 	apiAuth.POST("/login", handler.Login)
 }
