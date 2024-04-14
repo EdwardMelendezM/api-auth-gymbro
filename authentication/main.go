@@ -7,9 +7,10 @@ import (
 	"github.com/gin-gonic/gin"
 	_ "github.com/go-sql-driver/mysql"
 
-	"github.com/EdwardMelendezM/api-auth/authentication/setup"
 	"github.com/EdwardMelendezM/api-info-shared/config"
 	"github.com/EdwardMelendezM/api-info-shared/db"
+
+	"github.com/EdwardMelendezM/api-auth/authentication/setup"
 )
 
 // @securityDefinitions.apikey BearerAuth
