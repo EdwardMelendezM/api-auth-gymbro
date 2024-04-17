@@ -3,23 +3,12 @@ CREATE DATABASE IF NOT EXISTS gymbro_db;
 
 -- Utilizar la base de datos recién creada
 USE gymbro_db;
-
-create table core_users
-(
-    id         varchar(36)  not null
-        primary key,
-    username   varchar(255) not null,
-    password   varchar(255) not null,
-    enable     tinyint(1)   not null,
-    created_at timestamp    not null,
-    deleted_at timestamp    null
-);
-
 create table core_modules
 (
     id          varchar(36)  not null,
     name        varchar(255) not null,
     description varchar(255) not null,
+    icon        varchar(255) not null,
     enable      tinyint(1)   not null,
     created_at  timestamp    not null,
     deleted_at  timestamp    null,
@@ -34,10 +23,21 @@ create table core_roles
     name        varchar(255) not null,
     description varchar(255) not null,
     enable      tinyint(1)   not null,
-    created_at  timestamp    null,
+    created_at  timestamp    not null,
     deleted_at  timestamp    null
-) comment 'roles of user';
+)
+    comment 'roles of user';
 
+create table core_users
+(
+    id         varchar(36)  not null
+        primary key,
+    username   varchar(255) not null,
+    password   varchar(255) not null,
+    enable     tinyint(1)   not null,
+    created_at timestamp    not null,
+    deleted_at timestamp    null
+);
 
 create table core_user_roles
 (
@@ -49,7 +49,8 @@ create table core_user_roles
         foreign key (role_id) references core_roles (id),
     constraint user_roles_users_id_fk
         foreign key (user_id) references core_users (id)
-) comment 'roles por usuario';
+)
+    comment 'roles por usuario';
 
 create table core_views
 (
@@ -58,6 +59,7 @@ create table core_views
     module_id   varchar(36)  not null,
     name        varchar(255) not null,
     description varchar(255) not null,
+    icon        varchar(255) not null,
     enable      tinyint(1)   not null,
     created_at  timestamp    not null,
     deleted_at  timestamp    null,
@@ -76,6 +78,7 @@ create table core_roles_views
     constraint roles_views_views_id_fk
         foreign key (view_id) references core_views (id)
 );
+
 
 INSERT INTO core_users (id, username, password, enable, created_at)
 VALUES ('94d3dca2-f9da-11ee-811d-0242ac130002', 'afit@gym.com', '00000000', 1, NOW());
