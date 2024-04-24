@@ -1,11 +1,9 @@
 package rest
 
 import (
-	"github.com/gin-gonic/gin"
-
-	errorLog "github.com/EdwardMelendezM/api-info-shared/error-log"
-
 	authDomain "github.com/EdwardMelendezM/api-auth/authentication/domain"
+	errorLog "github.com/EdwardMelendezM/api-info-shared/error-log"
+	"github.com/gin-gonic/gin"
 )
 
 type authHandler struct {

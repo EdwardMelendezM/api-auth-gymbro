@@ -21,12 +21,18 @@ func (u authUseCase) Login(
 		return "", errCheckExistenceByUsername
 	}
 	if *checkExistenceByUsername != 1 {
-		return "", u.err.Clone().CopyCodeDescription(domain.ErrNotFoundUsername).SetRaw(errCheckExistenceByUsername)
+		return "", u.err.Clone().
+			CopyCodeDescription(domain.ErrNotFoundUsername).
+			SetRaw(errCheckExistenceByUsername).
+			SetHttpStatus(404)
 	}
 
 	var userId, errCheckExistenceByPassword = u.authRepository.VerifyPassword(ctx, body)
 	if errCheckExistenceByPassword != nil {
-		return "", errCheckExistenceByPassword
+		return "", u.err.Clone().
+			CopyCodeDescription(domain.ErrNotFoundPassword).
+			SetRaw(errCheckExistenceByUsername).
+			SetHttpStatus(404)
 	}
 
 	userIdAux = *userId
