@@ -5,6 +5,7 @@ import (
 	"os"
 
 	"github.com/gin-gonic/gin"
+	_ "github.com/go-sql-driver/mysql"
 
 	"github.com/EdwardMelendezM/api-auth/authentication/setup"
 	"github.com/EdwardMelendezM/api-info-shared/config"
@@ -25,6 +26,7 @@ func main() {
 	}
 	err := db.InitClients(cfg)
 	if err != nil {
+		println(err.Error())
 		return
 	}
 	defer db.Client.Close()
