@@ -12,5 +12,5 @@ services:
       MYSQL_USER: "erp_user"
       MYSQL_PASSWORD: "erp_password"
     volumes:
-      - ./seed/gymbro:/docker-entrypoint-initdb.d
+      - ./gymbro:/docker-entrypoint-initdb.d
     container_name: gymbro_db
