@@ -1,36 +1,27 @@
-# Stage 1: Build the Go binary
-FROM golang:alpine AS builder
+# Etapa de construcción
+FROM golang:1.19 AS builder
 
-# Set necessary environment variables
-ENV GO111MODULE=on \
-    CGO_ENABLED=0 \
-    GOOS=linux \
-    GOARCH=amd64
-
-# Set the working directory inside the container
+# Establecer el directorio de trabajo dentro del contenedor
 WORKDIR /app
 
-# Copy the Go modules manifests
+# Copiar go.mod y go.sum y descargar dependencias
 COPY go.mod go.sum ./
-
-# Download dependencies
 RUN go mod download
 
-# Copy the source code into the container
+# Copiar el código fuente
 COPY . .
 
-# Build the Go app
-RUN go build -o myapp .
+# Compilar la aplicación
+RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o /app/myapp
 
-
-# Stage 2: Create a minimal container to run the Go binary
+# Etapa final: usar una imagen base ligera de Alpine
 FROM alpine:latest
 
-# Set the working directory inside the container
-WORKDIR /root/
+# Instalar certificados raíz para conexiones HTTPS
+RUN apk --no-cache add ca-certificates
 
-# Copy the binary from the builder stage
-COPY --from=builder /app/myapp .
+# Copiar el ejecutable desde la etapa de construcción
+COPY --from=builder /app/myapp /app/myapp
 
-# Command to run the executable
-CMD ["./myapp"]
+# Establecer el comando de entrada del contenedor
+CMD ["/app/myapp"]
