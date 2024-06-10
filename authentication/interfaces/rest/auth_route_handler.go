@@ -26,4 +26,9 @@ func NewAuthHandler(
 
 	apiAuth := router.Group("/api/v1/auth")
 	apiAuth.POST("/login", handler.Login)
+	apiAuth.GET("/health", func(c *gin.Context) {
+		c.JSON(200, gin.H{
+			"status": "UP",
+		})
+	})
 }

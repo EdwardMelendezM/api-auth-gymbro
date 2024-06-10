@@ -23,5 +23,7 @@ RUN apk --no-cache add ca-certificates
 # Copiar el ejecutable desde la etapa de construcción
 COPY --from=builder /app/myapp /app/myapp
 
+EXPOSE 80
+
 # Establecer el comando de entrada del contenedor
 CMD ["/app/myapp"]
