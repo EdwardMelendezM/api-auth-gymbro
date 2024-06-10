@@ -17,13 +17,16 @@ RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o /app/myapp
 # Etapa final: usar una imagen base ligera de Alpine
 FROM alpine:latest
 
-# Instalar certificados raíz para conexiones HTTPS
-RUN apk --no-cache add ca-certificates
+# Instalar certificados raíz para conexiones HTTPS y zonas horarias
+RUN apk --no-cache add ca-certificates tzdata
+
+# Establecer la zona horaria
+ENV TZ=America/Lima
 
 # Copiar el ejecutable desde la etapa de construcción
 COPY --from=builder /app/myapp /app/myapp
 
-EXPOSE 80
+EXPOSE 9001
 
 # Establecer el comando de entrada del contenedor
 CMD ["/app/myapp"]
