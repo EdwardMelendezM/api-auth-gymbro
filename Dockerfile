@@ -26,7 +26,7 @@ ENV TZ=America/Lima
 # Copiar el ejecutable desde la etapa de construcción
 COPY --from=builder /app/myapp /app/myapp
 
-EXPOSE 9001
+EXPOSE 80
 
 # Establecer el comando de entrada del contenedor
 CMD ["/app/myapp"]
