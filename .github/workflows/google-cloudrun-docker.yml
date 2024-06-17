@@ -56,37 +56,37 @@ env:
 
 jobs:
   version:
-      runs-on: ubuntu-latest
-      steps:
-        - name: Checkout repository
-          uses: actions/checkout@v2
-          with:
-            fetch-depth: '0'
-  
-        - name: Get latest tag
-          id: latest_tag
-          run: |
-            VERSION_PREFIX="v"
-            LATEST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "$VERSION_PREFIX0.0.0")
-            echo "::set-output name=tag::$LATEST_TAG"
-  
-        - name: Calculate new tag and push
-          id: extract_version
-          run: |
-            VERSION="${{ steps.latest_tag.outputs.tag }}"
-            MAJOR=$(echo "$VERSION" | cut -d. -f1 | sed 's/v//')
-            MINOR=$(echo "$VERSION" | cut -d. -f2)
-            PATCH=$(echo "$VERSION" | cut -d. -f3)
-            if [ "${{ github.ref }}" = "refs/heads/develop" ]; then
-              MINOR=$((MINOR + 1))
-            elif [ "${{ github.ref }}" = "refs/heads/master" ]; then
-              MAJOR=$((MAJOR + 1))
-              MINOR=0
-            fi
-            NEW_VERSION="${VERSION_PREFIX}${MAJOR}.${MINOR}.${PATCH}"
-            echo "$NEW_VERSION"
-            git tag "$NEW_VERSION"
-            git push origin "$NEW_VERSION"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: '0'
+
+      - name: Get latest tag
+        id: latest_tag
+        run: |
+          VERSION_PREFIX="v"
+          LATEST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "$VERSION_PREFIX0.0.0")
+          echo "::set-output name=tag::$LATEST_TAG"
+
+      - name: Calculate new tag and push
+        id: extract_version
+        run: |
+          VERSION="${{ steps.latest_tag.outputs.tag }}"
+          MAJOR=$(echo "$VERSION" | cut -d. -f1 | sed 's/v//')
+          MINOR=$(echo "$VERSION" | cut -d. -f2)
+          PATCH=$(echo "$VERSION" | cut -d. -f3)
+          if [ "${{ github.ref }}" = "refs/heads/develop" ]; then
+            MINOR=$((MINOR + 1))
+          elif [ "${{ github.ref }}" = "refs/heads/master" ]; then
+            MAJOR=$((MAJOR + 1))
+            MINOR=0
+          fi
+          NEW_VERSION="${VERSION_PREFIX}${MAJOR}.${MINOR}.${PATCH}"
+          echo "$NEW_VERSION"
+          git tag "$NEW_VERSION"
+          git push origin "$NEW_VERSION"
   deploy:
     # Add 'id-token' with the intended permissions for workload identity federation
     permissions:
