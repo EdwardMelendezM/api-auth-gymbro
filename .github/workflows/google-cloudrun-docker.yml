@@ -42,7 +42,7 @@
 #   Container Registry vs Artifact Registry   - https://cloud.google.com/blog/products/application-development/understanding-artifact-registry-vs-container-registry
 #   Principle of least privilege              - https://cloud.google.com/blog/products/identity-security/dont-get-pwned-practicing-the-principle-of-least-privilege
 
-name: Build and Deploy to Cloud Run
+name: Deploy to Cloud Run
 
 on:
   push:
@@ -74,6 +74,9 @@ jobs:
         id: extract_version
         run: |
           VERSION="${{ steps.latest_tag.outputs.tag }}"
+          if [ "$VERSION"=".0.0" ]; then
+            VERSION="v1.0.0"
+          fi
           MAJOR=$(echo "$VERSION" | cut -d. -f1 | sed 's/v//')
           MINOR=$(echo "$VERSION" | cut -d. -f2)
           PATCH=$(echo "$VERSION" | cut -d. -f3)
