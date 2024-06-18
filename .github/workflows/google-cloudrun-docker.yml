@@ -81,10 +81,10 @@ jobs:
           MINOR=$(echo "$VERSION" | cut -d. -f2)
           PATCH=$(echo "$VERSION" | cut -d. -f3)
           if [ "${{ github.ref }}" = "refs/heads/develop" ]; then
-            MINOR=$((MINOR + 1))
+            PATCH=$((PATCH + 1))
           elif [ "${{ github.ref }}" = "refs/heads/master" ]; then
-            MAJOR=$((MAJOR + 1))
-            MINOR=0
+            MINOR=$((MINOR + 1))
+            PATCH=0
           fi
           NEW_VERSION="${VERSION_PREFIX}${MAJOR}.${MINOR}.${PATCH}"
           echo "$NEW_VERSION"
