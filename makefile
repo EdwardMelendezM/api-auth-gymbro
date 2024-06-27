@@ -11,7 +11,7 @@ run-api:
       api-auth
 
 dev-docker-tag:
-	docker tag api-auth us-east4-docker.pkg.dev/pragmatic-zoo-425418-a3/infocode1901/api-auth:latest
+	docker tag api-auth us-east4-docker.pkg.dev/pragmatic-zoo-425418-a3/infocode1901/api-auth:v1.0.0
 
 dev-docker-push:
-	docker push us-east4-docker.pkg.dev/pragmatic-zoo-425418-a3/infocode1901/api-auth:latest
+	docker push us-east4-docker.pkg.dev/pragmatic-zoo-425418-a3/infocode1901/api-auth:v1.0.0
