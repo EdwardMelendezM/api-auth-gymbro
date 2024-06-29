@@ -25,9 +25,9 @@ jobs:
           VERSION="${{ steps.latest_tag.outputs.tag }}"
           if [ "$VERSION"=".0.0" ]; then
             VERSION="v1.0.0"
-            echo "VERSION"
-            git tag "VERSION"
-            git push origin "VERSION"
+            echo "$VERSION"
+            git tag "$VERSION"
+            git push origin "$VERSION"
           elif [ "$VERSION" = *v*  ]; then
             MAJOR=$(echo "$VERSION" | cut -d. -f1 | sed 's/v//')
             MINOR=$(echo "$VERSION" | cut -d. -f2)
