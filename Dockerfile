@@ -28,5 +28,5 @@ COPY --from=builder /app/myapp /app/myapp
 
 EXPOSE 80
 
-# Establecer el comando de entrada del contenedor
+# Establecer el comando de entrada del contenedor, ejecucion
 CMD ["/app/myapp"]
