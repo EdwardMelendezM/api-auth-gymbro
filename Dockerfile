@@ -1,5 +1,5 @@
 # Etapa de construcción
-FROM golang:1.19 AS builder
+FROM golang:1.22 AS builder
 
 # Establecer el directorio de trabajo dentro del contenedor
 WORKDIR /app
