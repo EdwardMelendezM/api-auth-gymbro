@@ -25,7 +25,7 @@ var (
 				SetCode(ErrNotFoundPasswordCode).
 				SetDescription("PASSWORD NOT FOUND").
 				SetLevel(errLog.LevelError).
-				SetHttpStatus(http.StatusNotFound).
+				SetHttpStatus(http.StatusUnauthorized).
 				SetLayer(errLog.UseCase).
 				SetFunction("Login")
 
