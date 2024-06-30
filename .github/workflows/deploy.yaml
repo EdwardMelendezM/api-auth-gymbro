@@ -53,6 +53,7 @@ jobs:
           echo "VERSION=$VERSION" >> $GITHUB_ENV
 
   login-build-push:
+    needs: version
     if: github.event_name == 'push' && github.ref == 'refs/heads/master'
     name: Docker login, build, and push
     permissions:
