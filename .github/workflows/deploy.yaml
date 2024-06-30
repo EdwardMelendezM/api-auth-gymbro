@@ -26,6 +26,7 @@ jobs:
       - name: Get latest tag
         id: latest_tag
         run: |
+          git pull --tags
           VERSION_PREFIX="v"
           LATEST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "$VERSION_PREFIX0.0.0")
           echo "tag=$LATEST_TAG" >> $GITHUB_ENV
