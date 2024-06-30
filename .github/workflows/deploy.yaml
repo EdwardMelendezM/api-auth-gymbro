@@ -1,5 +1,11 @@
 name: Docker build and push to Artifact Registry
 
+on:
+  push:
+    branches:
+      - master
+      - develop
+
 env:
   PROJECT_ID: pragmatic-zoo-425418-a3
   GAR_LOCATION: us-east4
@@ -10,6 +16,9 @@ jobs:
 
   version:
     runs-on: ubuntu-latest
+    branches:
+      - master
+      - develop
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
