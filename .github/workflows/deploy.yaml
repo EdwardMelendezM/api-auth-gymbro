@@ -1,11 +1,5 @@
 name: Docker build and push to Artifact Registry
 
-on:
-  push:
-    branches:
-      - develop
-      - github-action
-
 env:
   PROJECT_ID: pragmatic-zoo-425418-a3
   GAR_LOCATION: us-east4
@@ -52,6 +46,7 @@ jobs:
           echo "VERSION=$VERSION" >> $GITHUB_ENV
 
   login-build-push:
+    branch: master
     name: Docker login, build, and push
     permissions:
       contents: 'read'
