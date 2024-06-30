@@ -13,8 +13,46 @@ env:
   IMAGE: api-auth
 
 jobs:
+  version:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: '0'
+
+      - name: Get latest tag
+        id: latest_tag
+        run: |
+          VERSION_PREFIX="v"
+          LATEST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "$VERSION_PREFIX0.0.0")
+          echo "::set-output name=tag::$LATEST_TAG"
+
+      - name: Calculate new tag and push
+        run: |
+          VERSION="${{ steps.latest_tag.outputs.tag }}"
+          if [[ "$VERSION" == ".0.0" ]]; then
+            VERSION="v1.0.0"
+          elif [[ "$VERSION" == *v* ]]; then
+            MAJOR=$(echo "$VERSION" | cut -d. -f1 | sed 's/v//')
+            MINOR=$(echo "$VERSION" | cut -d. -f2)
+            PATCH=$(echo "$VERSION" | cut -d. -f3)
+            if [ "${{ github.ref }}" = "refs/heads/develop" ]; then
+              PATCH=$((PATCH + 1))
+            elif [ "${{ github.ref }}" = "refs/heads/master" ]; then
+              MINOR=$((MINOR + 1))
+              PATCH=0
+            fi
+            VERSION="v${VERSION_PREFIX}${MAJOR}.${MINOR}.${PATCH}"
+          fi
+          echo "New version: $VERSION"
+          git tag "$VERSION"
+          git push origin "$VERSION"
   login-build-push:
     name: Docker login, build, and push
+    permissions:
+      contents: 'read'
+      id-token: 'write'
     runs-on: ubuntu-latest
 
     steps:
@@ -39,6 +77,8 @@ jobs:
         uses: google-github-actions/auth@v0.6.0
         with:
           credentials_json: '${{ secrets.GCP_CREDENTIALS }}'
+        run: |
+          echo "Access token: ${{ steps.auth.outputs.access_token }}"
 
       - name: Docker Auth
         uses: 'docker/login-action@v1'
