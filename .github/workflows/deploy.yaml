@@ -91,6 +91,7 @@ jobs:
 
       - name: Docker build and push container
         run: |-
+          gcloud auth configure-docker $GAR_LOCATION-docker.pkg.dev --quiet
           docker build \
             --tag "$GAR_LOCATION-docker.pkg.dev/$PROJECT_ID/$REPOSITORY/$IMAGE:${{ env.LATEST_TAG }}" ./
           docker push "$GAR_LOCATION-docker.pkg.dev/$PROJECT_ID/$REPOSITORY/$IMAGE:${{ env.LATEST_TAG }}"
