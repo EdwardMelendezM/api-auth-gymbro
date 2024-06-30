@@ -15,10 +15,10 @@ env:
 jobs:
 
   version:
-    runs-on: ubuntu-latest
     branches:
       - master
       - develop
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -55,7 +55,8 @@ jobs:
           echo "VERSION=$VERSION" >> $GITHUB_ENV
 
   login-build-push:
-    branch: master
+    branches:
+      - master
     name: Docker login, build, and push
     permissions:
       contents: 'read'
