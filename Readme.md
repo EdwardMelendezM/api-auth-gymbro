@@ -11,3 +11,4 @@ This is a microservice for the authentication service.
   ```script
   docker-compose up -d
   ```
+- Microservice for authenticate users and validation credentials 
