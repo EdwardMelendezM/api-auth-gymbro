@@ -7,9 +7,9 @@ on:
       - develop
 
 env:
-  PROJECT_ID: pragmatic-zoo-425418-a3
+  PROJECT_ID: gymbro-431702
   GAR_LOCATION: us-east4
-  REPOSITORY: infocode1901
+  REPOSITORY: gymbrov1
   IMAGE: api-auth
 
 jobs:
