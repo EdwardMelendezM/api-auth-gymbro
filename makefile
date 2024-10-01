@@ -1,6 +1,3 @@
-generate_seed_mysql:
-	docker-compose up -d
-
 build-api:
 	docker build -t api-auth .
 
